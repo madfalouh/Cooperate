@@ -1,4 +1,4 @@
-# Cooperate
+# Description
 
 this is an desktop an online learning platforme 
 
