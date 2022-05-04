@@ -1,19 +1,32 @@
-
-
 class SplashScreen {
+constructor() {
 
+const button = document.getElementById('button') ; 
+setTimeout( ()=>{
+this.createBrowserWindow() ;
+close(); 
+}, 1000);
  
- createBrowserWindow() {
+}
+  createBrowserWindow() {
+  const path = require('path');
   const remote = require('electron').remote;
   const BrowserWindow = remote.BrowserWindow;
   const win = new BrowserWindow({
-    height: 600,
-    width: 800
+ resizable :false , 
+  transparent: true, 
+     frame: false, 
+    
+    height: 480,
+    width: 768 , 
+ webPreferences: {
+      nodeIntegration: true , 
+      webSecurity: false
+    } ,
+ 
   });
 
-  win.loadURL('<url>');
+win.loadFile(path.join(__dirname, 'login-register/login.html'));
+win.webContents.openDevTools();
 }
-
-
-
 }
