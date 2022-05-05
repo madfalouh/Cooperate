@@ -88,7 +88,7 @@ button.ghost {
 	border-color: #FFFFFF;
 }
 
-form {
+.form {
     margin-top: -30px;
 	background-color: #FFFFFF;
 	display: flex;

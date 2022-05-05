@@ -21,7 +21,7 @@
 
 	<div class="form-container sign-up-container">
 
-		<form action="#">
+	<div class="form" >
              <button class="closeWindow" id="closeWindow">X</button>
 <img src="../images/logo.png"  width="200px" height="200px"  > </img>
 			<h1>Create Account</h1>
@@ -30,17 +30,17 @@
 			<input type="email" placeholder="Email" />
 			<input type="password" placeholder="Password" />
 			<button>Sign Up</button>
-		</form>
+		</div>
 	</div>
 	<div class="form-container sign-in-container">
-		<form action="#">
+		<div class="form" >
             <img src="../images/logo.png"  width="200px" height="200px"  > </img>
 			<h1>Sign in</h1>
 			<span>or use your account</span>
 			<input type="email" placeholder="Email"  id="email" />
 			<input type="password" placeholder="Password" />
 			<button  id="signinNow" >Sign In</button>
-		</form>
+		</div>
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
@@ -60,7 +60,6 @@
 	</div>
 </div>
 
-<!-- partial -->
 
 </body>
 </html>
@@ -85,20 +84,14 @@
  closeUpButton1.addEventListener('click', () => {
 		close() ; 
 	});
-
-
 </script>
 
 <script type = "text/typescript" >
-
-
-    var signinNow = document.getElementById('signinNow')
+var signinNow = document.getElementById('signinNow')
 op = new proxy()
 signinNow.addEventListener('click', () => {
-  
  if ( op.login(document.getElementById('email').value))
      console.log("fgjfgjifd")
-       
 	});
 
 </script>
