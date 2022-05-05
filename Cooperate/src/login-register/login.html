@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
+<script type = "text/typescript"   src="../proxy/proxy.tsx"></script>
+<script type = "text/typescript"   src="../proxy/proxySubject.tsx"></script>
+<script type = "text/typescript"   src="../proxy/realone.tsx"></script>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <meta charset="UTF-8">
     <link rel="stylesheet" href="login.css" />
-  <title>Responsive-Login-Form</title>
+  <title>Login-register</title>
   <link rel='stylesheet'  href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css'>
 
 
@@ -33,9 +37,9 @@
             <img src="../images/logo.png"  width="200px" height="200px"  > </img>
 			<h1>Sign in</h1>
 			<span>or use your account</span>
-			<input type="email" placeholder="Email" />
+			<input type="email" placeholder="Email"  id="email" />
 			<input type="password" placeholder="Password" />
-			<button>Sign In</button>
+			<button  id="signinNow" >Sign In</button>
 		</form>
 	</div>
 	<div class="overlay-container">
@@ -63,7 +67,7 @@
 
 
 
-<script>
+<script >
 	const closeUpButton = document.getElementById('closeWindow');
     const closeUpButton1 = document.getElementById('closeWindow1');
 	const signUpButton = document.getElementById('signUp');
@@ -75,17 +79,32 @@
 	signInButton.addEventListener('click', () => {
 		container.classList.remove("right-panel-active"); 
 	});
- 
   closeUpButton.addEventListener('click', () => {
 		close() ; 
 	});
-
  closeUpButton1.addEventListener('click', () => {
 		close() ; 
 	});
+
+
+</script>
+
+<script type = "text/typescript" >
+
+
+    var signinNow = document.getElementById('signinNow')
+op = new proxy()
+signinNow.addEventListener('click', () => {
+  
+ if ( op.login(document.getElementById('email').value))
+     console.log("fgjfgjifd")
+       
+	});
+
 </script>
 
 
-
+<script type="text/javascript" src="../ts/typescript.min.js"></script>
+<script type="text/javascript" src="../ts/typescript.compile.min.js"></script>
 
 

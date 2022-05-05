@@ -13,7 +13,7 @@ close();
   const remote = require('electron').remote;
   const BrowserWindow = remote.BrowserWindow;
   const win = new BrowserWindow({
- resizable :false , 
+ resizable :true , 
   transparent: true, 
      frame: false, 
     
