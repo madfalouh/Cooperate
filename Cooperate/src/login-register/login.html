@@ -1,122 +1,105 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
 
 
-<script type="text/javascript" src="await.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script type="text/javascript" src="await.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <meta charset="UTF-8">
-    <link rel="stylesheet" href="login.css" />
-  <title>Login-register</title>
-  <link rel='stylesheet'  href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css'>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="login.css" />
+	<title>Login-register</title>
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css'>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<script type = "text/babel"   src="../proxy/proxy.tsx"></script>
-<script type = "text/babel"   src="../proxy/proxySubject.tsx"></script>
-<script type = "text/babel"   src="../proxy/realone.tsx"></script>
+	<script type="text/babel" src="../proxy/proxy.tsx"></script>
+	<script type="text/babel" src="../proxy/proxySubject.tsx"></script>
+	<script type="text/babel" src="../proxy/realone.tsx"></script>
 
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
+	<!-- partial:index.partial.html -->
 
-<div class="container" id="container">
+	<div class="container" id="container">
 
-	<div class="form-container sign-up-container">
+		<div class="form-container sign-up-container">
 
-	<div class="form" >
-             <button class="closeWindow" id="closeWindow">X</button>
-<img src="../images/logo.png"  width="200px" height="200px"  > </img>
-			<h1>Create Account</h1>
-			<span>or use your email for registration</span>
+			<div class="form">
+				<button class="closeWindow" id="closeWindow">X</button>
+				<img src="../images/logo.png" width="200px" height="200px"> </img>
+				<h1>Create Account</h1>
+				<span>or use your email for registration</span>
 
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<button>Sign Up</button>
-		</div>
-	</div>
-	<div class="form-container sign-in-container">
-		<div class="form" >
-            <img src="../images/logo.png"  width="200px" height="200px"  > </img>
-			<h1>Sign in</h1>
-			<span>or use your account</span>
-			<input type="email" placeholder="Email"  id="email" />
-			<input type="password" placeholder="Password" />
-			<button  id="signinNow" >Sign In</button>
-		</div>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-               
-				<h1>Hello ! , There </h1>
-				<p>If you have an account with us click on  connect </p>
-				<button class="ghost" id="signIn">Sign In</button>
-			</div>
-			<div class="overlay-panel overlay-right">
-             <button class="closeWindow" id="closeWindow1">X</button>
-				<h1>Welcome Again</h1>
-				<p>Cooperate is the best online study dont have an account click on sign up  </p>
-				<button class="ghost" id="signUp">Sign Up</button>
+				<input type="email" placeholder="Email" />
+				<input type="password" placeholder="Password" />
+				<button>Sign Up</button>
 			</div>
 		</div>
+		<div class="form-container sign-in-container">
+			<div class="form">
+				<img src="../images/logo.png" width="200px" height="200px"> </img>
+				<h1>Sign in</h1>
+				<span>or use your account</span>
+				<input type="email" placeholder="Email" id="email" />
+				<input type="password" placeholder="Password" id="passwordd" />
+				<button id="signinNow">Sign In</button>
+			</div>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+
+					<h1>Hello ! , There </h1>
+					<p>If you have an account with us click on connect </p>
+					<button class="ghost" id="signIn">Sign In</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<button class="closeWindow" id="closeWindow1">X</button>
+					<h1>Welcome Again</h1>
+					<p>Cooperate is the best online study dont have an account click on sign up </p>
+					<button class="ghost" id="signUp">Sign Up</button>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
 
 
 </body>
+
 </html>
 
 
 
-<script >
-
-
+<script>
 	const closeUpButton = document.getElementById('closeWindow');
-    const closeUpButton1 = document.getElementById('closeWindow1');
+	const closeUpButton1 = document.getElementById('closeWindow1');
 	const signUpButton = document.getElementById('signUp');
 	const signInButton = document.getElementById('signIn');
 	const container = document.getElementById('container');
 	signUpButton.addEventListener('click', () => {
-		container.classList.add("right-panel-active"); 
+		container.classList.add("right-panel-active");
 	});
 	signInButton.addEventListener('click', () => {
-		container.classList.remove("right-panel-active"); 
+		container.classList.remove("right-panel-active");
 	});
-  closeUpButton.addEventListener('click', () => {
-		close() ; 
+	closeUpButton.addEventListener('click', () => {
+		close();
 	});
- closeUpButton1.addEventListener('click', () => {
-		close() ; 
+	closeUpButton1.addEventListener('click', () => {
+		close();
 	});
-
-
-
-
-
-
- 
 </script>
-
-<script type = "text/babel" >
-
-
-
-
-var signinNow = document.getElementById('signinNow')
-const op = new proxy()
-signinNow.addEventListener('click', () => {
- if ( op.auth(document.getElementById('email').value))
-     console.log("fgjfgjifd")
+<script type="text/babel">
+	var signinNow = document.getElementById('signinNow')
+	const op = new proxy()
+	signinNow.addEventListener('click', () => {
+		op.auth(document.getElementById('email').value, document.getElementById('passwordd').value).then(function (v) {
+			if (v) {
+				console.log("cool")
+			}
+		})
 	});
-
-
-
-
 </script>
-
-
-
-
-

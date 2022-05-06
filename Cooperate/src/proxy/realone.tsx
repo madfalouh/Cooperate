@@ -2,8 +2,8 @@
 
 constructor(){}
 
-    auth(username: String): any {
-        return  ; 
+    auth(username: string , password:string): Promise<Boolean>  {
+      return ;
     }
     
 }
