@@ -1,12 +1,9 @@
 class SplashScreen {
 constructor() {
-
-const button = document.getElementById('button') ; 
 setTimeout( ()=>{
 this.createBrowserWindow() ;
 close(); 
 }, 1000);
- 
 }
   createBrowserWindow() {
   const path = require('path');

@@ -153,7 +153,7 @@
 					</div>
 				</div>
 				<div class="user__text">
-					<span class="user__name">Falhi Mohamed Reda</span>
+					<span class="user__name" id="user" ></span>
 					<span class="user__title">Connected</span>
 				</div>
 			</button>
@@ -169,11 +169,12 @@
 </html>
 
 <script type="text/babel"  >
+const jwt = require("jsonwebtoken");
 const mainwindow:mainwindow = new mainwindow()
 var closeButton=document.getElementById('close') ; 
 var maximizeButton=document.getElementById('maximize') ; 
 var minimizeButton=document.getElementById('minimize') ; 
-
+var user = document.getElementById('user');
 closeButton.addEventListener('click', () => {
 		mainwindow.close() ; 
 	});
@@ -200,6 +201,8 @@ function toggle() {
   var element = document.getElementById("sidenav");
   element.classList.toggle("is-collapsed");
 }
+ 
+const decoded_token=jwt.verify(localStorage.getItem('__TOKEN__'), 'tokenkey');
 
-
+user.textContent = decoded_token.firstName;
 </script>

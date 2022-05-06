@@ -48,6 +48,7 @@
     "axios": "^0.27.2",
     "electron-squirrel-startup": "^1.0.0",
     "from": "^0.1.7",
+    "jsonwebtoken": "^8.5.1",
     "require": "^0.4.4"
   },
   "devDependencies": {
