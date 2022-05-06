@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+   	<link rel="stylesheet" href="mainwindow.css" />
+    <script type="text/babel" src="mainwindow.ts"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="all">
+
+    <div class="ui-titlebar">
+	<div class="ui-titletext"></div>
+	<div class="ui-titlecontrols"   >
+		<button class="ui-btn minimize" id="minimize" >
+			<svg x="0px" y="0px" viewBox="0 0 10.2 1"><rect x="0" y="50%" width="10.2" height="1" /></svg>
+		</button><button class="ui-btn maximize" id="maximize" >
+			<svg viewBox="0 0 10 10"><path d="M0,0v10h10V0H0z M9,9H1V1h8V9z" /></svg>
+		</button><button class="ui-btn close" id="close" >
+           
+			<svg viewBox="0 0 10 10"><polygon points="10.2,0.7 9.5,0 5.1,4.4 0.7,0 0,0.7 4.4,5.1 0,9.5 0.7,10.2 5.1,5.8 9.5,10.2 10.2,9.5 5.8,5.1" /></svg>
+		</button>
+	</div>
+</div>
+
+	<div id="sidenav" class="sidenav">
+		<header class="sidenav__header header">
+			<span class="header__icon">
+				<i class="fa fa-cube" aria-hidden="true"> <img id="oo" class="oo"  src="Capture.PNG" ></img>  </i>
+			</span>
+			<span class="header__text">Cooperate</span>
+			<button class="sidenav__button" aria-label="Expand" onClick="toggle()">
+				<span class="sidenav__button-icon">
+				<i class="fa fa-angle-left" aria-hidden="true">	<&nbsp;</i>
+
+				</span>
+			</button>
+		</header>
+		
+		<section class="search">
+			<label class="search__icon" for="search">
+				<i class="fa fa-search" aria-hidden="true"></i>
+				<span class="sr-only"></span>
+			</label>
+			<input id="search" type="text" class="search__input" placeholder="Search" onFocus="expand()">
+		</section>
+
+		<nav class="sidenav__nav nav">
+			<ul class="nav__list">
+				<li class="nav__item is-active">
+					<button class="nav__button">
+						<span class="nav__icon">
+						<p style="font-size:30px; margin-top:30px ; color:aliceblue " >🔔</p>	<i class="fa fa-home" aria-hidden="true"></i>
+						</span>
+						<span class="nav__label">Activité</span>
+					</button>
+				</li>
+				<li class="nav__item">
+					<button class="nav__button">
+						<span class="nav__icon">
+							<i class="fa fa-box" aria-hidden="true"></i>
+						<p style="font-size:30px; margin-top:30px ; color:aliceblue " >📧</p>	<i class="fa fa-home" aria-hidden="true"></i>
+
+ 						</span>	
+						<span class="nav__label">Conversation</span>
+					</button>
+				</li>
+				<li class="nav__item">
+					<button class="nav__button">
+						<span class="nav__icon">
+	<p style="font-size:30px; margin-top:30px ; color:aliceblue " >🤝🏻</p>	<i class="fa fa-home" aria-hidden="true"></i>
+
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+						<span class="nav__label">Equipes</span>
+					</button>
+				</li>
+				<li class="nav__item">
+					<button class="nav__button">
+
+						<span class="nav__icon">
+	<p style="font-size:30px; margin-top:30px ; color:aliceblue " >📅</p>	<i class="fa fa-home" aria-hidden="true"></i>
+							<i class="fa fa-flag" aria-hidden="true"></i>
+						</span>
+						<span class="nav__label">Calendrier</span>
+					</button>
+				</li>
+				<li class="nav__item">
+					<button class="nav__button">
+						<span class="nav__icon">
+						<p style="font-size:30px; margin-top:30px ; color:aliceblue " >📞</p>	<i class="fa fa-home" aria-hidden="true"></i>
+
+							<i class="fa fa-calendar" aria-hidden="true"></i>
+						</span>	
+						<span class="nav__label">Appel</span>
+					</button>
+				</li>
+				<li class="nav__item">
+					<button class="nav__button">
+						<span class="nav__icon">
+						<p style="font-size:30px; margin-top:30px ; color:aliceblue " >📘</p>	<i class="fa fa-home" aria-hidden="true"></i>
+
+						<i class="fa fa-user-friends" aria-hidden="true"></i>
+						</span>
+						<span class="nav__label">Fichier</span>
+					</button>
+				</li>
+			</ul>
+			<div class="nav__divider"></div>
+			<ul class="nav__list">
+				<li class="nav__item">
+					<button class="nav__button">
+						<span class="nav__icon">
+
+						<p style="font-size:30px; margin-top:30px ; color:aliceblue " >🌐</p>	<i class="fa fa-home" aria-hidden="true"></i>
+
+						<i class="fa fa-bell" aria-hidden="true"></i>
+						</span>
+						<span class="nav__label">Wikipedia</span>
+					</button>
+				 
+				</li>
+				<li class="nav__item">
+					<button class="nav__button">
+						<span class="nav__icon">
+						<p style="font-size:30px; margin-top:30px ; color:aliceblue " >⚙️</p>	<i class="fa fa-home" aria-hidden="true"></i>
+
+							<i class="fa fa-comments" aria-hidden="true"></i>
+						</span>
+						<span class="nav__label">Settings</span>
+					</button>
+			 
+				</li>
+				<li class="nav__item">
+					<button class="nav__button">
+						<span class="nav__icon">
+							<i class="fa fa-sliders-h" aria-hidden="true"></i>
+						</span>
+						 
+					</button>
+				</li>
+			</ul>
+		</nav>
+		
+		<div class="sidenav__footer user">
+			<button class="user__button">
+				<div class="user__badge">
+					<div class="user__image">
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</div>
+				</div>
+				<div class="user__text">
+					<span class="user__name">Falhi Mohamed Reda</span>
+					<span class="user__title">Connected</span>
+				</div>
+			</button>
+		</div>
+	</div>
+	
+	<div class="content"></div>
+</div>
+
+
+
+</body>
+</html>
+
+<script type="text/babel"  >
+const mainwindow:mainwindow = new mainwindow()
+var closeButton=document.getElementById('close') ; 
+var maximizeButton=document.getElementById('maximize') ; 
+var minimizeButton=document.getElementById('minimize') ; 
+
+closeButton.addEventListener('click', () => {
+		mainwindow.close() ; 
+	});
+
+maximizeButton.addEventListener('click', () => {
+		mainwindow.maximize()
+	});
+
+minimizeButton.addEventListener('click', () => {
+		mainwindow.minimize()
+	});
+
+function expand() {
+  var element = document.getElementById("sidenav");
+  element.classList.remove("is-collapsed");
+}
+
+function collapse() {
+  var element = document.getElementById("sidenav");
+  element.classList.add("is-collapsed");
+}
+
+function toggle() {
+  var element = document.getElementById("sidenav");
+  element.classList.toggle("is-collapsed");
+}
+
+
+</script>

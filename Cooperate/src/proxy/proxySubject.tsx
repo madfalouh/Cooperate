@@ -1,3 +1,3 @@
 interface proxySubject {
- auth(username: string , password:string ) : Promise<Boolean> ;  
+ auth(username: string , password:string ) : any;  
 }
