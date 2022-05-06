@@ -42,7 +42,13 @@
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "@electron/remote": "^2.0.8",
+    "async": "^3.2.3",
+    "await": "^0.2.6",
+    "axios": "^0.27.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "from": "^0.1.7",
+    "require": "^0.4.4"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.50",
@@ -51,6 +57,6 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.50",
     "@electron-forge/maker-zip": "^6.0.0-beta.50",
     "devtron": "^1.4.0",
-    "electron": "8.0.2"
+    "electron": "^8.0.2"
   }
 }

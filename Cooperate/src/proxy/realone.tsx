@@ -2,8 +2,8 @@
 
 constructor(){}
 
-    login(username: String): boolean {
-        return true ; 
+    auth(username: String): any {
+        return  ; 
     }
     
 }

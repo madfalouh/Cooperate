@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-<script type = "text/typescript"   src="../proxy/proxy.tsx"></script>
-<script type = "text/typescript"   src="../proxy/proxySubject.tsx"></script>
-<script type = "text/typescript"   src="../proxy/realone.tsx"></script>
+
+
+<script type="text/javascript" src="await.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <meta charset="UTF-8">
     <link rel="stylesheet" href="login.css" />
   <title>Login-register</title>
   <link rel='stylesheet'  href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css'>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-
+<script type = "text/babel"   src="../proxy/proxy.tsx"></script>
+<script type = "text/babel"   src="../proxy/proxySubject.tsx"></script>
+<script type = "text/babel"   src="../proxy/realone.tsx"></script>
 
 </head>
 <body>
@@ -67,6 +71,8 @@
 
 
 <script >
+
+
 	const closeUpButton = document.getElementById('closeWindow');
     const closeUpButton1 = document.getElementById('closeWindow1');
 	const signUpButton = document.getElementById('signUp');
@@ -84,20 +90,33 @@
  closeUpButton1.addEventListener('click', () => {
 		close() ; 
 	});
+
+
+
+
+
+
+ 
 </script>
 
-<script type = "text/typescript" >
+<script type = "text/babel" >
+
+
+
+
 var signinNow = document.getElementById('signinNow')
-op = new proxy()
+const op = new proxy()
 signinNow.addEventListener('click', () => {
- if ( op.login(document.getElementById('email').value))
+ if ( op.auth(document.getElementById('email').value))
      console.log("fgjfgjifd")
 	});
 
+
+
+
 </script>
 
 
-<script type="text/javascript" src="../ts/typescript.min.js"></script>
-<script type="text/javascript" src="../ts/typescript.compile.min.js"></script>
+
 
 

@@ -17,7 +17,10 @@ const createWindow = () => {
     height: 350,
 
  webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true , 
+contextIsolation: false , 
+
+   enableRemoteModule: true,
     }
   });
 
@@ -25,7 +28,7 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
-
+ mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished

@@ -1,3 +1,3 @@
 interface proxySubject {
- login(username: String) : boolean ;  
+ auth(username: String) : any ;  
 }
