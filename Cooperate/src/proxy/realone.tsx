@@ -14,14 +14,16 @@ constructor(){}
     height: 1920,
     width: 1080 , 
  webPreferences: {
-      nodeIntegration: true , 
-      webSecurity: false
+  nodeIntegration: true , 
+contextIsolation: false , 
+webviewTag:true,
+   enableRemoteModule: true,
     } ,
  
   });
 
 win.loadFile(path.join(__dirname, '../main-window/mainwindow.html'));
-//win.webContents.openDevTools();
+win.webContents.openDevTools();
 
       
       

@@ -1385,10 +1385,10 @@
     "lodash.template" "^4.2.2"
     "temp" "^0.9.0"
 
-"electron@^8.0.2", "electron@>= 13.0.0":
-  "integrity" "sha512-e355H+tRDial0m+X2v+l+0SnaATAPw4sNjv9qmdk/6MJz/glteVJwVJEnxTjPfEELIJSChrBWDBVpjdDvoBF4Q=="
-  "resolved" "https://registry.npmjs.org/electron/-/electron-8.5.5.tgz"
-  "version" "8.5.5"
+"electron@>= 13.0.0", "electron@8.0.2":
+  "integrity" "sha512-hiQaFtFhd9X2Vjs01l3GXb8hPWSCa31o/kXydo+RC7vwcx9AGuzG7jWIq8vidzAWsF/YPM0LFVjFRZrfkqi03Q=="
+  "resolved" "https://registry.npmjs.org/electron/-/electron-8.0.2.tgz"
+  "version" "8.0.2"
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
@@ -2241,6 +2241,11 @@
   "integrity" "sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo="
   "resolved" "https://registry.npmjs.org/isstream/-/isstream-0.1.2.tgz"
   "version" "0.1.2"
+
+"jquery@^3.6.0":
+  "integrity" "sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw=="
+  "resolved" "https://registry.npmjs.org/jquery/-/jquery-3.6.0.tgz"
+  "version" "3.6.0"
 
 "jsbn@~0.1.0":
   "integrity" "sha1-peZUwuWi3rXyAdls77yoDA7y9RM="
@@ -3428,11 +3433,6 @@
   "resolved" "https://registry.npmjs.org/require-main-filename/-/require-main-filename-2.0.0.tgz"
   "version" "2.0.0"
 
-"require@^0.4.4":
-  "integrity" "sha1-AZk4Uoc4zFXr0ZRxMGsSnl61z+A="
-  "resolved" "https://registry.npmjs.org/require/-/require-0.4.4.tgz"
-  "version" "0.4.4"
-
 "resolve-alpn@^1.0.0":
   "integrity" "sha512-0a1F4l73/ZFZOakJnQ3FvkJ2+gSTQWz/r2KE5OdDY0TxPm5h4GkqkWWfM47T7HsbnOtcJVEF4epCVy6u7Q3K+g=="
   "resolved" "https://registry.npmjs.org/resolve-alpn/-/resolve-alpn-1.2.1.tgz"
@@ -4149,6 +4149,13 @@
   "resolved" "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
   "version" "3.0.1"
 
+"webview@^1.0.0":
+  "integrity" "sha512-BV+mmVhbRwe2/kKs7h/RWOG8Fy4qOPM6DEyXAQzJAf28PtSWWFJSPp/YUhVtap8gMOwKgG6rN4Ydv7+1QCq21A=="
+  "resolved" "https://registry.npmjs.org/webview/-/webview-1.0.0.tgz"
+  "version" "1.0.0"
+  dependencies:
+    "yargs-parser" "^20.2.0"
+
 "whatwg-url@^5.0.0":
   "integrity" "sha1-lmRU6HZUYuN2RNNib2dCzotwll0="
   "resolved" "https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz"
@@ -4261,6 +4268,11 @@
     "decamelize" "^1.2.0"
 
 "yargs-parser@^20.0.0":
+  "integrity" "sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w=="
+  "resolved" "https://registry.npmjs.org/yargs-parser/-/yargs-parser-20.2.9.tgz"
+  "version" "20.2.9"
+
+"yargs-parser@^20.2.0":
   "integrity" "sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w=="
   "resolved" "https://registry.npmjs.org/yargs-parser/-/yargs-parser-20.2.9.tgz"
   "version" "20.2.9"

@@ -1,0 +1,76 @@
+html, body{height: 100%;overflow: hidden;}
+body{
+  margin: 0;
+  background: #e1b7df;
+  background: linear-gradient(45deg, #e1b7df 0%,#b97fd3 50%,#5b45cc 100%);
+}
+#container{
+  width: 360px;
+  margin: 60px auto;
+  font-family: 'Trebuchet MS', Tahoma, sans-serif;
+  .profile-wrapper{
+    list-style:none;
+    padding: 0;
+    border-radius:4px;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px 3px rgba(109,63,176,0.5);
+    .profile{
+      clear: both; 
+      overflow: hidden;
+      padding: 12px;
+      cursor:pointer;
+      background: #f8f8f8;
+      outline:none;
+      -webkit-user-select: none;
+      transition: all 0.3s ease-in-out;
+      &:hover, &:focus{
+        background: #a597d5;
+        .info, .info h4{
+          color: #fff;
+        }
+      }
+      figure{
+        float: left;
+        margin: 0;
+        margin-right: 18px;
+        img {
+          display: block;
+          width: 60px;
+          height: 60px;
+          border-radius:50%;
+          border:2px solid #9f8ed2;
+        }
+      }
+      .info{
+        float: left;
+        color:#999;
+        font-size:14px;
+        transition: color 0.3s ease-in-out;
+        h4{
+          text-transform: capitalize;
+          transition: color 0.3s ease-in-out;
+          font-size: 16px;
+          color:#4256a1;
+          margin:12px 0 6px;
+          font-weight:normal;
+        }
+      }
+      + .profile{
+        border-top:1px solid #ccc;
+      }
+    }
+  }
+  #user{
+    margin-bottom: 60px;
+    text-align: center;
+    figure img{
+      border-radius:100%;
+      border:6px solid #fff;
+    }
+    .info h4{
+      text-transform: capitalize;
+      font-size:20px;
+      margin-bottom: 4px;
+    }
+  }
+}

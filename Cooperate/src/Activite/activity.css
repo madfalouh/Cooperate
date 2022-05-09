@@ -1,0 +1,97 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+}
+
+#container {
+  width: 360px;
+  margin: 60px auto;
+  font-family: 'Trebuchet MS', Tahoma, sans-serif;
+}
+
+#container .profile-wrapper {
+  list-style: none;
+  padding: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 0px 5px 3px rgba(109, 63, 176, 0.5);
+          box-shadow: 0px 0px 5px 3px rgba(109, 63, 176, 0.5);
+}
+
+#container .profile-wrapper .profile {
+  clear: both;
+  overflow: hidden;
+  padding: 12px;
+  cursor: pointer;
+  background: #f8f8f8;
+  outline: none;
+  -webkit-user-select: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#container .profile-wrapper .profile:hover, #container .profile-wrapper .profile:focus {
+  background: #a597d5;
+}
+
+#container .profile-wrapper .profile:hover .info, #container .profile-wrapper .profile:hover .info h4, #container .profile-wrapper .profile:focus .info, #container .profile-wrapper .profile:focus .info h4 {
+  color: #fff;
+}
+
+#container .profile-wrapper .profile figure {
+  float: left;
+  margin: 0;
+  margin-right: 18px;
+}
+
+#container .profile-wrapper .profile figure img {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #9f8ed2;
+}
+
+#container .profile-wrapper .profile .info {
+  float: left;
+  color: #999;
+  font-size: 14px;
+  -webkit-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+}
+
+#container .profile-wrapper .profile .info h4 {
+  text-transform: capitalize;
+  -webkit-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+  font-size: 16px;
+  color: #4256a1;
+  margin: 12px 0 6px;
+  font-weight: normal;
+}
+
+#container .profile-wrapper .profile + .profile {
+  border-top: 1px solid #ccc;
+}
+
+#container #user {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+#container #user figure img {
+  border-radius: 100%;
+  border: 6px solid #fff;
+}
+
+#container #user .info h4 {
+  text-transform: capitalize;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+/*# sourceMappingURL=activity.css.map */

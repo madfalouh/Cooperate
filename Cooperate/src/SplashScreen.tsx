@@ -18,12 +18,13 @@ close();
     width: 768 , 
  webPreferences: {
       nodeIntegration: true , 
-      webSecurity: false
+      webSecurity: false ,
+webviewTag:true,
     } ,
  
   });
 
 win.loadFile(path.join(__dirname, 'login-register/login.html'));
-//win.webContents.openDevTools();
+win.webContents.openDevTools();
 }
 }

@@ -25,10 +25,9 @@ console.log(data);
           data: data
         }).then((response) => {
          console.log(response);
-          
+           localStorage.setItem('__TOKEN__', response.data) ;
           this.lk.auth(data.email , data.password)  
-         sessionStorage.setItem('__TOKEN__', response.data);
-         localStorage.setItem('__TOKEN__', response.data) ;
+          close();
         }).catch((error) => {
             console.error('There was an error!', error);
         });
