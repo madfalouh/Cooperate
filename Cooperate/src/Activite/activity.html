@@ -26,15 +26,16 @@
 
 <script type="text/babel" >
 
- 
+ const token = JSON.parse(localStorage.getItem('decoded_token')) ; 
 
+Activity:Activity = new Activity(JSON.parse(localStorage.getItem('decoded_token'))) ; 
+Activity.fetchActivities() ; 
 
-
-
+   Activity.addactivities();
 $(function(){
   var data = {
   employee : [      {
-        name : 'ethen hunt',
+        name : token.firstName,
         position : 'Senior Frontend Developer',
         pic : 'https://dl.dropboxusercontent.com/s/q9q20r92696kt3g/ethen-hunt.jpg'      
       },
@@ -65,9 +66,6 @@ $(function(){
 });
 
 
-Activity:Activity = new Activity(localStorage.getItem('decoded_token')) ; 
-
-Activity.fetchActivities() ; 
 
 
 </script>

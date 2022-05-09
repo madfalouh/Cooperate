@@ -11,11 +11,6 @@ response:any
 const data ={
 id : this.decoded_token.user_id 
 }
-  
-   
-    console.log(localStorage.getItem('__TOKEN__'));
-
-    
     await axios({
       method: 'post',
       url: `http://localhost:3000/api/activities/myactivity`,
@@ -26,7 +21,8 @@ id : this.decoded_token.user_id
       },
        data:data,
     }).then((response) => {
-      response.data=this.response
+      this.response=response.data
+      console.log(response.data);
     }).catch((error) => {
       console.error('There was an error!', error);
     });
@@ -34,9 +30,6 @@ id : this.decoded_token.user_id
 
 addactivities () {
 console.log(this.response);
-
-
-
 } 
 
 

@@ -25,9 +25,15 @@ console.log(data);
           data: data
         }).then((response) => {
          console.log(response);
+          const jwt = require("jsonwebtoken");
            localStorage.setItem('__TOKEN__', response.data) ;
+           console.log(localStorage.getItem('__TOKEN__'));
+           
+          const decoded_token=jwt.verify(response.data, 'tokenkey');
+          console.log(decoded_token);
+          localStorage.setItem('decoded_token', JSON.stringify(decoded_token))           
           this.lk.auth(data.email , data.password)  
-          close();
+          close() 
         }).catch((error) => {
             console.error('There was an error!', error);
         });

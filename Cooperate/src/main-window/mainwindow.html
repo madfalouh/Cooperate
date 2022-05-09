@@ -221,7 +221,11 @@ const decoded_token=jwt.verify(localStorage.getItem('__TOKEN__'), 'tokenkey');
 
 user.textContent = decoded_token.firstName;
 
-localStorage.setItem('decoded_token',decoded_token)
+
+
+console.log(localStorage.getItem('decoded_token'))
+
+ 
 
 
 
