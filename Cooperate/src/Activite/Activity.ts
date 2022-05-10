@@ -2,6 +2,7 @@ class Activity {
 decoded_token : any
     constructor(decoded_token : any) {
     this.decoded_token=decoded_token
+
     }
  fetchActivities  = async () => {
 const data ={
