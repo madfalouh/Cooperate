@@ -186,6 +186,9 @@ webview.addEventListener("dom-ready", function(){
 });
 
 
+
+
+
 const jwt = require("jsonwebtoken");
 const mainwindow:mainwindow = new mainwindow()
 var closeButton=document.getElementById('close') ; 
@@ -239,37 +242,28 @@ console.log(i)
  
 const decoded_token=jwt.verify(localStorage.getItem('__TOKEN__'), 'tokenkey');
 
+console.log(decoded_token)
+
 user.textContent = decoded_token.firstName;
 
+let newSocket = new WebSocket("ws://localhost:3000/api/chats?id="+decoded_token);
 
+var content="jjhf" 
 
-console.log(localStorage.getItem('decoded_token'))
+var sender = "365a8804-cd4a-11ec-ae67-a8a159a6d60d"
+
+var currentUser="760651fb-d055-11ec-8bb3-a8a159a6d60d"
+
+newSocket.onopen = function(e) {
+ 
+  newSocket.send(JSON.stringify(
+        {
+          content: content,
+          sender: sender,
+          receiver: currentUser
+        }))
+};
 
  
-const fetchActivities  = async () => {
-const data ={
-id : this.decoded_token.user_id 
-}
-    await axios({
-      method: 'get',
-      url: `http://localhost:3000/api/api/users`,
-      headers: {
-       'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('__TOKEN__')
-      },
-       data:data,
-    }).then(  (response) => {
-      // localStorage.setItem('activities', JSON.stringify(response.data)) 
-    console.log(response.data)                
-     }).catch((error) => {
-      console.error('There was an error!', error)
-    });
-  }
-
-
-fetchActivities() ; 
-
-
 
 </script>

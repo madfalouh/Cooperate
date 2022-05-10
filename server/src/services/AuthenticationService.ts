@@ -24,7 +24,8 @@ export class AuthenticationService {
             }
     
             // TODO: add token verification
-            const decoded_token = jwt.verify(token, process.env.TOKEN_KEY);
+           
+            const decoded_token = jwt.verify(token, "tokenkey");
             const now = Math.floor(Date.now() / 1000);
             if (decoded_token && decoded_token.exp > now) {
                 const userRepository = getCustomRepository(UserRepository);

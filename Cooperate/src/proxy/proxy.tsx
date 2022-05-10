@@ -10,11 +10,12 @@ constructor() {
 }
 
 async  auth(username:string , password:string ):Promise<any> {
+
+  
   const data = {
             email:username ,
             password: password
         };
-console.log(data);
  await axios({
           method: 'post',
           url: 'http://localhost:3000/api/login',
@@ -33,14 +34,28 @@ console.log(data);
           console.log(decoded_token);
           localStorage.setItem('decoded_token', JSON.stringify(decoded_token))           
           this.lk.auth(data.email , data.password)  
-          close() 
+          
         }).catch((error) => {
             console.error('There was an error!', error);
         });
+      const jwt = require("jsonwebtoken");
+const decoded_token=jwt.verify(localStorage.getItem('__TOKEN__'), 'tokenkey');
+console.log(localStorage.getItem('__TOKEN__'));
+
+
+    }
+
+
+  }
+
+
+
+
+
 
  
 
-  }
+  
 
-  }
+  
 
