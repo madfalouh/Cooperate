@@ -23,9 +23,10 @@
 
 
 <div class="all">
-        <webview src="../Activite/activity.html" autosize   id="foo" ></webview>
+        <webview src="../Activite/activity.html" class="webview" id="foo" ></webview>
 
     <div class="ui-titlebar">
+
 	<div class="ui-titletext"></div>
 	<div class="ui-titlecontrols"   >
 		<button class="ui-btn minimize" id="minimize" >
@@ -178,6 +179,7 @@
 
 
 <script type="text/babel"  >
+var i = 0 ; 
 var webview=document.getElementById("foo")
 webview.addEventListener("dom-ready", function(){
   webview.openDevTools();
@@ -205,16 +207,34 @@ minimizeButton.addEventListener('click', () => {
 function expand() {
   var element = document.getElementById("sidenav");
   element.classList.remove("is-collapsed");
+
+webview.style.marginRight="30px"
 }
 
 function collapse() {
   var element = document.getElementById("sidenav");
   element.classList.add("is-collapsed");
+
+ 
+
+
 }
 
 function toggle() {
   var element = document.getElementById("sidenav");
   element.classList.toggle("is-collapsed");
+if(i%2===0){
+console.log("pair")
+  webview.style.left="85px"
+i++
+
+ }
+else{
+console.log("impair")
+webview.style.left="250px"
+i++
+console.log(i)
+}
 }
  
 const decoded_token=jwt.verify(localStorage.getItem('__TOKEN__'), 'tokenkey');
@@ -226,10 +246,29 @@ user.textContent = decoded_token.firstName;
 console.log(localStorage.getItem('decoded_token'))
 
  
+const fetchActivities  = async () => {
+const data ={
+id : this.decoded_token.user_id 
+}
+    await axios({
+      method: 'get',
+      url: `http://localhost:3000/api/api/users`,
+      headers: {
+       'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('__TOKEN__')
+      },
+       data:data,
+    }).then(  (response) => {
+      // localStorage.setItem('activities', JSON.stringify(response.data)) 
+    console.log(response.data)                
+     }).catch((error) => {
+      console.error('There was an error!', error)
+    });
+  }
 
 
-
-
+fetchActivities() ; 
 
 
 

@@ -1,69 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<link rel="stylesheet" href="activity.css" />
-        <script type="text/babel" src="Activity.ts"></script>
+  <link rel="stylesheet" href="activity.css" />
+  <script type="text/babel" src="Activity.ts"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
-<body>
 
-<div id="container">
-  <div id="user"></div>
-  <div id="profiles"></div>
+<body>
+<div class="four">
+  <h1><br> My activities</h1>
 </div>
+  <div id="container">
+    <div id="user"></div>
+    <div id="profiles"></div>
+  </div>
 
 </body>
 
 </html>
 
 
-<script type="text/babel" >
+<script type="text/babel">
 
- const token = JSON.parse(localStorage.getItem('decoded_token')) ; 
+  let alldata = [];
+  const token = JSON.parse(localStorage.getItem('decoded_token'));
 
-Activity:Activity = new Activity(JSON.parse(localStorage.getItem('decoded_token'))) ; 
-Activity.fetchActivities() ; 
+  Activity: Activity = new Activity(JSON.parse(localStorage.getItem('decoded_token')));
 
-   Activity.addactivities();
-$(function(){
+  Activity.fetchActivities();
+  JSON.parse(localStorage.getItem('activities')).map(x => {
+    alldata.push(x)
+  })
+  console.log(alldata[0])
   var data = {
-  employee : [      {
-        name : token.firstName,
-        position : 'Senior Frontend Developer',
-        pic : 'https://dl.dropboxusercontent.com/s/q9q20r92696kt3g/ethen-hunt.jpg'      
-      },
-      {
-        name : 'emily blinn',
-        position : 'QA Lead',
-        pic : 'https://dl.dropboxusercontent.com/s/83nf1i5cimm6oy9/emily-blinn.jpg'      
-      },
-      {
-        name : 'john smith',
-        position : 'QA Lead',
-        pic : 'https://dl.dropboxusercontent.com/s/94nxzgb50k7x4hd/john-smith.jpg'      
-      }]
+    alldata
   };
-  
-  
   var result = '<div class="profile-wrapper">';
-  $(data.employee).each(function(key, val){
-    result += '<div class="profile" tabindex="0"><figure><img src='+ val.pic +' /></figure><span class="info"><h4>' + val.name + '</h4><span>' + val.position + '</span></span></div>';
+  $(data.alldata).each(function (key, val) {
+    result += '<div class="profile" tabindex="0"><figure><img src=' + 'https://dl.dropboxusercontent.com/s/q9q20r92696kt3g/ethen-hunt.jpg' + ' /></figure><span class="info"><h4>' + val.id + '</h4><span>' + 'hobaa' + '</span></span></div>';
   });
   result += '</div>';
   $('#profiles').append(result);
-  
 
 
 
-  
-});
+
+
+
 
 
 

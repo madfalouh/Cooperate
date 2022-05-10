@@ -2,6 +2,24 @@
 
 body{
 overflow-y: hidden;
+background: #fdfeff;
+}
+
+.all{
+background-color: #ffffff;
+
+}
+
+.webview {
+position: absolute;
+top: 0;
+left: 250px;
+
+width: 380px;
+
+height: 1000px;
+
+
 }
 
 .ui-titlebar {
@@ -156,7 +174,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   padding: 1rem;
-  background: #cad5e8;
+  background: #ffffff;
   font-family: 'Lato', 'Arial', sans-serif;
   color: #212121;
 }

@@ -21,4 +21,7 @@ export class Activity {
   @Column("text")
     userId: String='';
 
+@Column("text")
+    SenderName: String='';
+
 }

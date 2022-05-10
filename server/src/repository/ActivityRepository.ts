@@ -16,7 +16,6 @@ export class ActivityRepository extends Repository<Activity> {
     }
 
     public findByuserid = (userId: String) => {
-console.log("jhedfbzjdfjkfdjkhfgdjkdfgjkh");
         console.log(userId);
         
         return this.createQueryBuilder("Activity")

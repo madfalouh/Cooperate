@@ -1,13 +1,9 @@
-
-
 class Activity {
 decoded_token : any
-response:any
     constructor(decoded_token : any) {
- console.log(decoded_token);
-        this.decoded_token=decoded_token ;
+    this.decoded_token=decoded_token
     }
- fetchActivities = async () => {
+ fetchActivities  = async () => {
 const data ={
 id : this.decoded_token.user_id 
 }
@@ -20,19 +16,10 @@ id : this.decoded_token.user_id
         'Authorization': 'Bearer ' + localStorage.getItem('__TOKEN__')
       },
        data:data,
-    }).then((response) => {
-      this.response=response.data
-      console.log(response.data);
-    }).catch((error) => {
-      console.error('There was an error!', error);
+    }).then(  (response) => {
+       localStorage.setItem('activities', JSON.stringify(response.data))                 
+     }).catch((error) => {
+      console.error('There was an error!', error)
     });
   }
-
-addactivities () {
-console.log(this.response);
-} 
-
-
-
-
 }
