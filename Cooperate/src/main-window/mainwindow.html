@@ -6,12 +6,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="../Activite/activity.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script src="csi.min.js" ></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
    	<link rel="stylesheet" href="mainwindow.css" />
     <script type="text/babel" src="mainwindow.ts"></script>
-        <script type="text/babel" src="../Activite/Activity.ts"></script>
+    <script type="text/babel" src="../Activite/Activity.ts"></script>
+  <script type="text/babel" src="../Activite/Activity.ts"></script>
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +23,7 @@
 
 
 <div class="all">
-        <webview src="../Activite/activity.html" class="webview" id="foo" ></webview>
+        <webview src="../chat/chapage.html" class="webview" id="foo" ></webview>
 
     <div class="ui-titlebar">
 
@@ -246,7 +246,6 @@ console.log(decoded_token)
 
 user.textContent = decoded_token.firstName;
 
-let newSocket = new WebSocket("ws://localhost:3000/api/chats?id="+decoded_token);
 
 var content="jjhf" 
 
@@ -254,15 +253,7 @@ var sender = "365a8804-cd4a-11ec-ae67-a8a159a6d60d"
 
 var currentUser="760651fb-d055-11ec-8bb3-a8a159a6d60d"
 
-newSocket.onopen = function(e) {
- 
-  newSocket.send(JSON.stringify(
-        {
-          content: content,
-          sender: sender,
-          receiver: currentUser
-        }))
-};
+
 
  
 

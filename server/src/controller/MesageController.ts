@@ -32,15 +32,16 @@ export class MessageController {
 
             ws.on('message', async (message: any) => {
                 const messageStored = await this.messageService.create(JSON.parse(message.toString()));
-                console.log(messageStored);
+                
                 
                 if (messageStored !== null) {
                     this.socketMap.forEach((socket, id) => {
-                        if (messageStored.receiver === id || messageStored.sender === id) {
-                            if (socket.readyState === WebSocket.OPEN) {
+                       
+                           
+                                console.log(messageStored);
                                 socket.send(JSON.stringify(messageStored));
-                            }
-                        }
+                            
+                        
                     });
                 }
             });
