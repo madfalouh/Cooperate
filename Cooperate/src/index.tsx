@@ -3,7 +3,7 @@ const path = require('path');
 //app.setPath ('userData', __dirname +"this");
 //app.setPath ('userData', __dirname +"this1");
 //app.setPath ('userData', __dirname +"this2");
-//app.setPath ('userData', __dirname +"this3");
+app.setPath ('userData', __dirname +"this3");
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -15,11 +15,11 @@ const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
  resizable :false , 
-  transparent: true, 
-     frame: false, 
+ // transparent: true, 
+     //frame: false, 
      alwaysOnTop: true ,
-    width: 500,
-    height: 350,
+    width: 1500,
+    height: 1350,
 
  webPreferences: {
       nodeIntegration: true , 

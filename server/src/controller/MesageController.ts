@@ -33,28 +33,22 @@ export class MessageController {
             ws.on('message', async (message: any) => {
                 const messageStored = await this.messageService.create(JSON.parse(message.toString()));
                 
-                
-                if (messageStored !== null) {
-                    this.socketMap.forEach((socket, id) => {
-                       
-                           
-                                console.log(messageStored);
-                                socket.send(JSON.stringify(messageStored));
-                            
-                        
-                    });
-                }
-            });
+                 wss.clients.forEach( (client) => {
+                  
+                         if (messageStored) {
+                             client.send(JSON.stringify(messageStored));
+                                              console.log(messageStored);
 
-            try {
-                const id = req.url.split("id=")[1].split("&")[0];
-                this.socketMap.set(id, ws);
-            } catch (err) {
-                Logger.error(err);
-            }
+                         } else {
+                             client.send('ERROR');
+                         }
+                     
+                 });
+            
+
         });
-    }
-
+          }
+        )}
     public routes() {
         this.router.get('/', this.getAll);
         this.router.get('/:id', this.getOne);

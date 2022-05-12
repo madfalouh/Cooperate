@@ -16,8 +16,6 @@
  <main class='app'>
   <aside class='c-sidepanel'>
     <div class='c-panels'>
-      <a class='c-panels__logo' href='' title=''>AM</a>
-      
       <nav class='c-panels__navigation'>
         <ul class='c-panels__ul'>
           <li class='c-panels__li'><a class='c-panels__link' href='' title=''><i class="fas fa-search"></i>
@@ -37,19 +35,7 @@
      
       
       <h2 class='c-group-title'>Direct Messages <i class="fas fa-plus"></i></h2>
-      <ul class='c-users__people' id="myul" >
-        <li class='c-users__person'>Jeremy Firow</li>
-        <li class='c-users__person'>Mariuz Jaders</li>
-        <li class='c-users__person'>Emil Anders</li>
-        <li class='c-users__person'>Markus Gavrilov</li>
-      </ul>
-      
-      <h2 class='c-group-title'>Groups <i class="fas fa-plus"></i></h2>
-      <ul class='c-tags' > 
-        <li><i class="fas fa-hashtag"></i>Crypto</li>
-        <li><i class="fas fa-hashtag"></i>Futures</li>
-        <li><i class="fas fa-hashtag"></i>Finance</li>
-        <li><i class="fas fa-hashtag"></i>Stocktalk Germany</li>
+      <ul class='c-users__people' id="myul">
       </ul>
     </div>
   </aside>
@@ -63,36 +49,11 @@
     </header>
     <div class='c-chat__window'  id="chat" >
     
+</div>
+<input class='c-users__search' type='text' placeholder='Type here to send your message ' id='send'     onkeydown=  'if (event.keyCode == 13) { send();  } '  style="display: none;" >
 
   </section>
-      <input class='c-users__search' type='text' placeholder='Type here to send your message ' id="send" >
 
-  <div class='c-chat-info'>
-    <header class='c-chat__header c-chat__header--left'>
-      <div class='c-chat__title'>
-        <h2><i class="fas fa-hashtag"></i> Group Info</h2>
-        <p>Created 2/22/2221</p>
-      </div>
-      
-    </header>
-    <div class='c-chat__options'>
-     <h2 class='c-group-title'>Members <i class="fas fa-chevron-down"></i></h2>
-      <ul class='c-users__people'>
-       
-        <li class='c-users__person'>Markus Gavrilov</li>
-        <li class='c-users__person'>Mariuz Jaders</li>
-        <li class='c-users__person'>Jeremy Firow</li>
-        <li class='c-users__person'>Emil Anders</li>
-        
-      </ul>
-    
-     <h2 class='c-group-title'>Shared Files <i class="fas fa-chevron-right"></i></h2>
-    <h2 class='c-group-title'>Pinned Messages <i class="fas fa-chevron-right"></i></h2>
-    <h2 class='c-group-title'>Starred Files <i class="fas fa-chevron-right"></i></h2>
-<button onclick="send()" >  di </button>
-
-  </div>
-    </div>
 </main>
 </body>
 </html>
@@ -122,6 +83,10 @@ if(message.sender===token.user_id){
 }
 result +="</div>"
   $('#chat').append(result);
+var ul = document.getElementById("chat")
+
+         ul.scrollTo(0, ul.scrollHeight);
+
 };
 const chat:chat = new chat(token)
 
@@ -141,6 +106,9 @@ j++;
 }
 
 ul.addEventListener('click', function(e) {
+var input = document.getElementById("send")
+  $('#chat').empty()
+
   e.preventDefault()
 selectedUser= users[e.target.id] ;
     if (e.target.tagName === 'LI'){
@@ -157,8 +125,14 @@ if(message.sender.id===token.user_id){
 
 
 });
+
 result +="</div>"
+result +="</div>"
+
   $('#chat').append(result);
+var ul = document.getElementById("chat")
+         ul.scrollTo(0, ul.scrollHeight);
+input.style.display="inline"
 
     }
 });
@@ -167,7 +141,8 @@ result +="</div>"
 function send() {
 
 var content = document.getElementById("send").value
-
+var input = document.getElementById("send")
+input.value=''
 
 newSocket.send(JSON.stringify(
         {

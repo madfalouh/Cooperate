@@ -29,10 +29,12 @@ body {
 }
 
 .app {
+position: absolute;
+ left: 0;
   border-radius: 4px;
   width: 100%;
-  max-width: 1400px;
-  min-height: 650px;
+  max-width: 700px;
+height: 700px;
   background: var(--core-bg);
   border: 2px solid var(--primary);
   display: -ms-grid;
@@ -275,8 +277,9 @@ body {
 }
 
 .c-chat__window {
+  width: 397.4px;
   overflow-x: hidden;
-  max-height: 900px;
+  max-height: 550px;
 }
 
 .c-chat__icon {
@@ -359,3 +362,19 @@ body {
   }
 }
 /*# sourceMappingURL=chat.css.map */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+::-webkit-scrollbar-track {
+    background-color: #ebebeb;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #6d6d6d; 
+}
