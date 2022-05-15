@@ -44,8 +44,7 @@
   <section class='c-chat'>
     <header class='c-chat__header'>
       <div class='c-chat__title'>
-        <h1><i class="fas fa-hashtag"></i> Pelican Room</h1>
-        <p>6 Members</p><button><i class="fas fa-plus"></i> Add Member</button>
+        <h1><i class="fas fa-hashtag"></i> Chat Page</h1>
       </div>
       <div class='c-chat__options'></div>
     </header>
@@ -53,7 +52,7 @@
     
 </div>
 <input class='c-users__search' type='text' placeholder='Type here to send your message ' id='send'     onkeydown=  'if (event.keyCode == 13) { send();  } '  style="display: none;" >
-      <input type="file" name="upload_file" id="file" onChange={handlefile} ></input>
+      <input type="file" name="upload_file" id="file" onchange="handlefile(this)" ></input>
 
   </section>
 
@@ -239,10 +238,64 @@ newSocket.send(JSON.stringify(
 
 const handlefile = async (e) => {
     console.log("lol")
-    const file = e.target.files[0];
+    const file = document.getElementById("file").files[0]
     const base64 = await convertBase64(file);
-    pdf=base64 ; 
-    downloadPDF(pdf)
+   // let pdf=base64 ; 
+
+
+const name = "yea"
+const id ="gkkjkbnjkluiubjkbiiujkjklbfh"
+const fiile="rgrf" 
+const idd = selectedGroup.groupname
+let data ={
+id:id , 
+name :  name,
+file:base64 , 
+type:name,
+groupname : idd,
+}
+console.log(data);
+
+    await axios({
+      method: 'post',
+      url: `http://localhost:3000/api/files/`,
+      headers: {
+       'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('__TOKEN__')
+      },
+       data:data,
+    }).then(  (response) => {
+       console.log(response.data);
+       
+       //localStorage.setItem('activities', JSON.stringify(response.data))                 
+     }).catch((error) => {
+      console.error('There was an error!', error)
+    });
+
+data ={
+groupname : idd,
+}
+await axios({
+      method: 'post',
+      url: `http://localhost:3000/api/files/myfiles`,
+      headers: {
+       'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('__TOKEN__')
+      },
+       data:data,
+    }).then(  (response) => {
+        console.log(response.data[0].file)
+         downloadPDF(response.data[0].file)
+       //localStorage.setItem('activities', JSON.stringify(response.data))                 
+     }).catch((error) => {
+      console.error('There was an error!', error)
+    });
+
+
+
+    
   }
 
 
@@ -265,7 +318,7 @@ const handlefile = async (e) => {
   };
 
 function downloadPDF(pdf) {
-const linkSource = `data:application/pdf;base64,${pdf}`;
+const linkSource = `${pdf}`;
 const downloadLink = document.createElement("a");
 const fileName = "abc.pdf";
 downloadLink.href = linkSource;

@@ -15,6 +15,7 @@ import { ProductController } from "../controller/ProductController";
 import { SellController } from "../controller/SellController";
 import { UserController } from "../controller/UserController";
 import { GroupController } from "../controller/GroupController";
+import { FileController } from "../controller/FileController";
 import { AuthenticationService } from "./AuthenticationService";
 import Logger, { loggerMiddleware } from "./Logger";
 
@@ -29,6 +30,7 @@ export class Server {
     private messageController?: MessageController;
     private callController?: CallController;
     private groupController?: GroupController;
+    private fileController?: FileController;
     private authenticationController?: AuthenticationController;
     private unauthenticatedRoutes: Array<string> = ['/api/login', '/api/login/', '/api/users/register', '/api/users/register/'];
 
@@ -47,8 +49,8 @@ export class Server {
         this.app.set('port', process.env.PORT || 3000);
         //limit file transfer to 200mb
         const myParser = require("body-parser");
-        this.app.use(myParser.json({limit: '200mb'}));
-        this.app.use(myParser.urlencoded({limit: '200mb', extended: true}));
+        this.app.use(myParser.json({limit: '500mb'}));
+        this.app.use(myParser.urlencoded({limit: '500mb', extended: true}));
 
         // Use in order to accept CORS -> Enabled communicaion with the front end
         this.app.use(cors());
@@ -125,9 +127,10 @@ export class Server {
         this.activityController= new ActivityController();
         this.callController=new CallController() ; 
         this.groupController=new GroupController();
+        this.fileController = new FileController() ;
         // Configure routes for each controller
         this.app.use("/api/", this.authenticationController.router);
-        this.app.use("/api/products", this.productController.router);
+        this.app.use("/api/files", this.fileController.router);
         this.app.use("/api/activities", this.activityController.router);
         this.app.use("/api/users", this.userController.router);
         this.app.use("/api/sells", this.sellController.router);
