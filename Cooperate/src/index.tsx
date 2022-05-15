@@ -3,7 +3,7 @@ const path = require('path');
 //app.setPath ('userData', __dirname +"this");
 //app.setPath ('userData', __dirname +"this1");
 //app.setPath ('userData', __dirname +"this2");
-app.setPath ('userData', __dirname +"this3");
+//app.setPath ('userData', __dirname +"this3");
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -14,14 +14,15 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
- resizable :false , 
+ //resizable :false , 
  // transparent: true, 
      //frame: false, 
-     alwaysOnTop: true ,
+   //  alwaysOnTop: true ,
     width: 1500,
     height: 1350,
 
  webPreferences: {
+      webSecurity: false ,
       nodeIntegration: true , 
 contextIsolation: false , 
 webviewTag:true,

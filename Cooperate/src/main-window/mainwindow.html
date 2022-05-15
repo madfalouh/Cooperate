@@ -23,8 +23,9 @@
 
 
 <div class="all">
-        <webview src="../chat/chapage.html" class="webview" id="foo" ></webview>
-
+		
+		<webview src="../Activite/activity.html" class="webview" id="foo" ></webview>
+<webview src="../chat/chapage.html" class="webview1" id="foo1" ></webview>
     <div class="ui-titlebar">
 
 	<div class="ui-titletext"></div>
@@ -162,6 +163,7 @@
 				<div class="user__text">
 					<span class="user__name" id="user" ></span>
 					<span class="user__title">Connected</span>
+					<button id="lol"  onclick="lol()"  >hjjhjhhj</button>
 				</div>
 			</button>
 		</div>
@@ -169,7 +171,28 @@
 	
 	<div class="content"></div>
 </div>
+<div class="card"  id="call" >
+  <div class="headerr">
+    <div class="animation">
+      <span class="icon ring"></span>
+      <div class="cercle one"></div>
+      <div class="cercle two"></div>
+      <div class="cercle three"></div>
+    </div>
 
+    <p class="phoneNumber" id="callname" ></p>
+    <p class="calling">Is calling you</p>
+  </div>
+
+  <div class="footer">
+    <div class="bouton raccrocher">
+      <span class="icon red" onclick="refuse()" ></span>
+    </div>
+    <div class="bouton decrocher">
+      <span class="icon green"  onclick="answer()" ></span>
+    </div>
+  </div>
+	</div>
 
 
 </body>
@@ -179,10 +202,17 @@
 
 
 <script type="text/babel"  >
+var call = document.getElementById("call")
+var audio= new Audio("samsung.mp3")
+call.style.display="none" ; 
+
+
 var i = 0 ; 
 var webview=document.getElementById("foo")
+
+var webview1=document.getElementById("foo1")
 webview.addEventListener("dom-ready", function(){
-  webview.openDevTools();
+  webview1.openDevTools();
 });
 
 
@@ -240,21 +270,68 @@ console.log(i)
 }
 }
  
-const decoded_token=jwt.verify(localStorage.getItem('__TOKEN__'), 'tokenkey');
-
-console.log(decoded_token)
-
-user.textContent = decoded_token.firstName;
 
 
-var content="jjhf" 
+const shell = require('electron').shell;
+  
+// assuming $ is jQuery
+const token = JSON.parse(localStorage.getItem('decoded_token'));
+var btn =document.getElementById("lol")
+let newSocket = new WebSocket("ws://localhost:4000/api/calls");
+newSocket.onmessage = function(message) {
 
-var sender = "365a8804-cd4a-11ec-ae67-a8a159a6d60d"
+console.log( JSON.parse( message.data ).userId +"ht"+token.user_id)
+ if( JSON.parse( message.data ).userId===token.user_id   ){
+var myp = document.getElementById("callname")
+myp.value=JSON.parse( message.data ).SenderName
+call.style.display="inline" ;
+audio.play()
+if(audio.paused){
+call.style.display="none" ;
+audio.currentTime = 0;
 
-var currentUser="760651fb-d055-11ec-8bb3-a8a159a6d60d"
+
+}
+
+}
 
 
+};
 
- 
+function answer(){
+call.style.display="none" ;
+shell.openExternal('file:///C:/Users/reda%20falhi/OneDrive/Bureau/group-video-chat-master/index.html')
+audio.pause();
+audio.currentTime = 0;
+
+}
+
+
+function refuse(){
+call.style.display="none" ;
+audio.pause();
+audio.currentTime = 0;
+
+
+}
+
+
+function lol(){
+shell.openExternal('file:///C:/Users/reda%20falhi/OneDrive/Bureau/group-video-chat-master/index.html')
+
+const token = JSON.parse(localStorage.getItem('decoded_token'));
+
+const selectedUser =  JSON.parse(localStorage.getItem('selecteduser')).id
+  const id= "effgfhgfgghef"  ;
+
+newSocket.send(JSON.stringify(
+        {
+          id: id  ,
+          description: token.firstName+" has called you at:00.27",
+          userId: selectedUser  , 
+         SenderName:   token.user_id,
+        }
+      ));
+}
 
 </script>

@@ -1,6 +1,7 @@
 import { getCustomRepository } from "typeorm";
 import { Message } from "../entity/Message";
 import { User } from "../entity/User";
+import { GroupUser } from "../entity/GroupUser";
 import { MessageRepository } from "../repository/MessageRepository";
 import Logger from "./Logger";
 
@@ -49,6 +50,11 @@ export class MessageService {
      */
      public findMessageSentByUser = async (user: User) => {
         const messages = await this.messageRepository.findMessageSentByUser(user);
+        return messages;
+    }
+
+     public findMessageByGroup = async (user: GroupUser) => {
+        const messages = await this.messageRepository.findMessageByGroup(user);
         return messages;
     }
 

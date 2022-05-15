@@ -9,21 +9,26 @@ var cors = require('cors');
 import { createConnection}  from "typeorm";
 import { AuthenticationController } from "../controller/AuthenticationController";
 import { MessageController } from "../controller/MesageController";
+import { CallController } from "../controller/CallController";
 import { ActivityController } from "../controller/ActivityController";
 import { ProductController } from "../controller/ProductController";
 import { SellController } from "../controller/SellController";
 import { UserController } from "../controller/UserController";
+import { GroupController } from "../controller/GroupController";
 import { AuthenticationService } from "./AuthenticationService";
 import Logger, { loggerMiddleware } from "./Logger";
 
 export class Server {
     private app: express.Application;
     private server: any;
+    private callserver: any;
     private productController?: ProductController;
     private activityController?: ActivityController;
     private userController?: UserController;
     private sellController?: SellController;
     private messageController?: MessageController;
+    private callController?: CallController;
+    private groupController?: GroupController;
     private authenticationController?: AuthenticationController;
     private unauthenticatedRoutes: Array<string> = ['/api/login', '/api/login/', '/api/users/register', '/api/users/register/'];
 
@@ -118,6 +123,8 @@ export class Server {
         this.sellController = new SellController();
         this.messageController = new MessageController();
         this.activityController= new ActivityController();
+        this.callController=new CallController() ; 
+        this.groupController=new GroupController();
         // Configure routes for each controller
         this.app.use("/api/", this.authenticationController.router);
         this.app.use("/api/products", this.productController.router);
@@ -125,6 +132,7 @@ export class Server {
         this.app.use("/api/users", this.userController.router);
         this.app.use("/api/sells", this.sellController.router);
         this.app.use("/api/messages", this.messageController.router);
+         this.app.use("/api/groups", this.groupController.router);
 
         this.unknownRoutesConfiguration();
     }
@@ -136,12 +144,17 @@ export class Server {
         // End server Initialisation (sockets)
         await this.routes();
         this.server = require('http').createServer(this.app);
+        this.callserver =require('http').createServer();
         this.messageController?.initSockets(this.server);
-
+        this.callController?.initSockets(this.callserver)
         // Start the server
         this.server.listen(process.env.PORT || 3000, () => {
             Logger.info(`Server is listening ${this.server.address().port} port.`);
         });
+          this.callserver.listen( 4000, () => {
+            Logger.info(`call Server is listening ${this.callserver.address().port} port.`);
+        });
+
     }
 
     public stop = async () => {}

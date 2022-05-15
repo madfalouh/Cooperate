@@ -32,9 +32,9 @@ body {
 position: absolute;
  left: 0;
   border-radius: 4px;
-  width: 100%;
-  max-width: 700px;
-height: 700px;
+  width: 150%;
+  max-width: 1000px;
+height: 800px;
   background: var(--core-bg);
   border: 2px solid var(--primary);
   display: -ms-grid;
@@ -277,7 +277,7 @@ height: 700px;
 }
 
 .c-chat__window {
-  width: 397.4px;
+  width: 696px;
   overflow-x: hidden;
   max-height: 550px;
 }

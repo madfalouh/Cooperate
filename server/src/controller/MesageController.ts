@@ -4,6 +4,7 @@ import { Server } from "ws";
 import { MessageService } from "../services/MessageService";
 import Logger from "../services/Logger";
 import { UserService } from "../services/UserService";
+import {GroupService } from "../services/GroupService";
 import { Message } from "../entity/Message";
 const WebSocket = require('ws');
 
@@ -16,10 +17,11 @@ export class MessageController {
     private userService: UserService;
     public router: Router;
     private socketMap = new Map<string, any>();
-
+    private groupservice:GroupService;
     constructor() {
         this.messageService = new MessageService();
         this.userService = new UserService();
+        this.groupservice = new GroupService();
         this.router = Router();
         this.routes();
     }
@@ -32,6 +34,7 @@ export class MessageController {
 
             ws.on('message', async (message: any) => {
                 const messageStored = await this.messageService.create(JSON.parse(message.toString()));
+                console.log(messageStored);
                 
                  wss.clients.forEach( (client) => {
                   
@@ -53,6 +56,7 @@ export class MessageController {
         this.router.get('/', this.getAll);
         this.router.get('/:id', this.getOne);
         this.router.get('/user/:id', this.getUserMessage);
+        this.router.get('/group/:id', this.getGroupMessage);
         this.router.get('/user/:id/received', this.getUserReceivedMessage);
         this.router.get('/user/:id/sent', this.getUserSentMessage);
         this.router.post(
@@ -152,6 +156,33 @@ export class MessageController {
             return;
         }
     }
+
+   public getGroupMessage = async (req: Request, res: Response, next: NextFunction) => {
+        Logger.debug('GET user messages ');
+
+        const userId = req.params.id;
+        if (userId === undefined || userId === null) {
+            res.status(400).send("Error, parameter id is missing or wrong").end();
+            return;
+        }
+        else {
+            // Check if the user exist
+            const user = await this.groupservice.findOne(userId);
+            if (user === undefined) {
+                // Send 404 error
+                res.status(404).send('The user does not exist').end();
+                return;
+            }
+
+            // TODO: change method
+            const messages = await this.messageService.findMessageByGroup(user)
+            // Send message found
+            res.send(messages).end();
+            return;
+        }
+    }
+
+
 
     /**
      * GET all messages by user id
