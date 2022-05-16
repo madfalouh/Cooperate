@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="containerr">
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Num</th>
+            <th scope="col">Article Name</th>
+            <th scope="col">Group Name</th>
+            <th scope="col">Responsable</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody  id="table" >
+    
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+<script type="text/babel"  >   
+
+  var result = '<tr>';
+
+
+
+
+
+
+ /* <tr>
+            <th scope="row"  id="pdfname">1</th>
+            <td>Bootstrap 4 CDN and Starter Template</td>
+            <td>Cristina</td>
+            <td>2.846</td>
+            <td>
+                <button type="button" class="btn btn-success">Downald<i class="fas fa-edit"></i></button>
+            </td>
+          </tr>  */
+
+ /* $(data.alldata).each(function (key, val) {
+    result += '<div class="profile" tabindex="0"><figure><img src=' + 'https://dl.dropboxusercontent.com/s/q9q20r92696kt3g/ethen-hunt.jpg' + ' /></figure><span class="info"><h4>' + val.id + '</h4><span>' + 'hobaa' + '</span></span></div>';
+  });
+  result += '</div>';
+  $('#profiles').append(result);
+*/
+
+ 
+const handlefile = async () => {
+
+
+const groups =JSON.parse( localStorage.getItem('usergroups')) ;
+
+console.log(groups)
+const data = {
+
+ groupname :"physique"
+}
+ 
+await axios({
+      method: 'post',
+      url: `http://localhost:3000/api/files/myfiles`,
+      headers: {
+       'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('__TOKEN__')
+      },
+       data:data,
+    }).then(  (response) => { 
+
+          $(response.data).each(function (key, val) {
+     
+    result += '<tr> <th scope="row"  id="pdfname">'+val.id+'</th><td>'+val.groupname+'</td><td>Cristina</td><td>2.846</td><td><button type="button" class="btn btn-success"  onclick="downloadPDF()" >Downald<i class="fas fa-edit"></i></button></td></tr>';
+  });
+  result += '</tr>';
+  $('#table').append(result);
+
+
+        //localStorage.setItem('activities', JSON.stringify(response.data))                 
+     }).catch((error) => {
+      console.error('There was an error!', error)
+    });
+
+
+
+
+
+
+}
+
+
+handlefile()
+
+
+function downloadPDF() {
+var pdf=''
+const linkSource = `${pdf}`;
+const downloadLink = document.createElement("a");
+const fileName = "abc.pdf";
+downloadLink.href = linkSource;
+downloadLink.download = fileName;
+downloadLink.click();}
+
+</script>

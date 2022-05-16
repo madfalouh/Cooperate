@@ -24,8 +24,7 @@
 
 <div class="all">
 		
-		<webview src="../Activite/activity.html" class="webview" id="foo" ></webview>
-   <webview src="../chat/chapage.html" class="webview1" id="foo1" ></webview>
+    <webview src="../chat/chapage.html" class="webview1" id="foo1" ></webview>
     <div class="ui-titlebar">
 
 	<div class="ui-titletext"></div>
@@ -169,7 +168,7 @@
 			</button>
 		</div>
 	</div>
-	<div id="calltrap-btn" class="b-calltrap-btn calltrap_offline hidden-phone visible-tablet" href="tel:0936307069"  onclick="lol()"  ><div id="calltrap-ico"></div></div>
+	<div id="calltrap-btn" class="b-calltrap-btn calltrap_offline hidden-phone visible-tablet" href="tel:0936307069"  onclick='lol()''  ><div id="calltrap-ico"></div></div>
 
 	<div class="content"></div>
  </div>
@@ -213,7 +212,7 @@ var i = 0 ;
 var webview=document.getElementById("foo")
 
 var webview1=document.getElementById("foo1")
-webview.addEventListener("dom-ready", function(){
+webview1.addEventListener("dom-ready", function(){
   webview1.openDevTools();
 });
 

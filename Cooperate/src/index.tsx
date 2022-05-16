@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-//app.setPath ('userData', __dirname +"this");
+app.setPath ('userData', __dirname +"this");
 //app.setPath ('userData', __dirname +"this1");
 //app.setPath ('userData', __dirname +"this2");
 //app.setPath ('userData', __dirname +"this3");

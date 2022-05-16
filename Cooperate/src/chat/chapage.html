@@ -52,7 +52,12 @@
     
 </div>
 <input class='c-users__search' type='text' placeholder='Type here to send your message ' id='send'     onkeydown=  'if (event.keyCode == 13) { send();  } '  style="display: none;" >
-      <input type="file" name="upload_file" id="file" onchange="handlefile(this)" ></input>
+      
+
+<div class="fileUpload btn btn--browse" style="display: none;"  id="browse" >
+    <span>Add File</span>
+    <input id="file" type="file" class="upload"   name="upload_file"   onchange="handlefile(this)"  ></input>
+</div>
 
   </section>
 
@@ -82,10 +87,10 @@ if(message.sender===token.user_id &&  message.receivers===undefined ){
      result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ selectedUser.firstName +" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
 
 }else if(message.receivers.includes(token.user_id)  &&  message.receivers!==undefined) {
-     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ "selectedUser.firstName" +" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ message.sender.firstName +" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
 
 }else if(!message.receivers.includes(token.user_id)  &&   message.receivers!==undefined) {
-     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ selectedUser.firstName +" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ message.sender.firstName +" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
 
 }
 
@@ -97,7 +102,7 @@ var ul = document.getElementById("chat")
 
 };
 const chat:chat = new chat(token)
-
+var b = document.getElementById("browse")
 chat.fetchUsermessage()
 chat.fetchUserGroupes()
 chat.fetchUserGroupsMessages()
@@ -129,7 +134,7 @@ j++;
 
 
 ul.addEventListener('click', function(e) {
-
+b.style.display="none"
 localStorage.removeItem('selecteduser')
 
 var input = document.getElementById("send")
@@ -163,6 +168,9 @@ input.style.display="inline"
 
 let selectedGroup=null ;
 ul2.addEventListener('click', function(e) {
+
+
+b.style.display="inline"
 selectedUser=null ; 
 var input = document.getElementById("send")
 $('#chat').empty()
@@ -178,7 +186,7 @@ if(message.group.id===selectedGroup.id){
   if(message.content!=="undefined")
      result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ token.firstName+" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
 }else{
-     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ "users[e.target.id].firstName"+" </span><time>12:49pm</time><p>"+message.content+"</p></div></div>";
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ message.sender.firstName+" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
 
 }
 
@@ -241,10 +249,14 @@ const handlefile = async (e) => {
     const file = document.getElementById("file").files[0]
     const base64 = await convertBase64(file);
    // let pdf=base64 ; 
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
 
-
-const name = "yea"
-const id ="gkkjkbnjkluiubjkbiiujkjklbfh"
+const name = document.getElementById("file").files[0].name
+const id =uuidv4()
 const fiile="rgrf" 
 const idd = selectedGroup.groupname
 let data ={
