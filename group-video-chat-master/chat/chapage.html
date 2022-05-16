@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="text/babel" src="chat.ts"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <link rel="stylesheet" href="chat.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <main class='app'>
+  <aside class='c-sidepanel'>
+    <div class='c-panels'>
+      <nav class='c-panels__navigation'>
+        <ul class='c-panels__ul'>
+          <li class='c-panels__li'><a class='c-panels__link' href='' title=''><i class="fas fa-search"></i>
+</a></li>
+          <li class='c-panels__li'><a class='c-panels__link' href='' title=''><i class="far fa-dot-circle"></i></a></li>
+          <li class='c-panels__li'><a class='c-panels__link' href='' title=''><i class="fas fa-chart-bar"></i></a></li>
+          <li class='c-panels__li'><a class='c-panels__link' href='' title=''><i class="far fa-comments"></i></a></li>
+          <li class='c-panels__li'><a class='c-panels__link' href='' title=''><i class="fab fa-app-store"></i></a></li>
+          <li class='c-panels__li'><a class='c-panels__link' href='' title=''><i class="fas fa-asterisk"></i></a></li>
+          <li class='c-panels__li'><a class='c-panels__link' href='' title=''><i class="fab fa-bandcamp"></i></a></li>
+          <li class='c-panels__li'><a class='c-panels__link' href='' title=''><i class="far fa-address-book"></i></a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class='c-users'>
+      
+     
+      
+      <h2 class='c-group-title'>Direct Messages <i class="fas fa-plus"></i></h2>
+      <ul class='c-users__people' id="myul">
+      </ul>
+       <ul class='c-users__people' id="myulgrp">
+      </ul>
+    </div>
+  </aside>
+  <section class='c-chat'>
+    <header class='c-chat__header'>
+      <div class='c-chat__title'>
+        <h1><i class="fas fa-hashtag"></i> Chat Page</h1>
+      </div>
+      <div class='c-chat__options'></div>
+    </header>
+    <div class='c-chat__window'  id="chat" >
+    
+</div>
+<input class='c-users__search' type='text' placeholder='Type here to send your message ' id='send'     onkeydown=  'if (event.keyCode == 13) { send();  } '  style="display: none;" >
+      
+
+    <input id="uploadFile" class="f-input" />
+<div class="fileUpload btn btn--browse">
+    <span>Browse</span>
+    <input id="file" type="file" class="upload"   name="upload_file"   onchange="handlefile(this)"  ></input>
+</div>
+
+  </section>
+
+</main>
+</body>
+</html>
+
+<script type="text/babel">
+
+var pdf = null ;
+
+const token = JSON.parse(localStorage.getItem('decoded_token'));
+console.log("my token "+token.firstName)
+let newSocket = new WebSocket("ws://localhost:3000/api/chats?id="+token);
+let selectedUser ; 
+
+
+newSocket.onmessage = function(message) {
+message=JSON.parse(message.data)
+console.log(message)
+var result = "";
+
+if(message.sender===token.user_id &&  message.receivers===undefined ){
+
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ token.firstName+" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
+}else if(message.sender!==token.user_id  &&  message.receivers===undefined) {
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ selectedUser.firstName +" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
+
+}else if(message.receivers.includes(token.user_id)  &&  message.receivers!==undefined) {
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ "selectedUser.firstName" +" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
+
+}else if(!message.receivers.includes(token.user_id)  &&   message.receivers!==undefined) {
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ selectedUser.firstName +" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
+
+}
+
+result +="</div>"
+  $('#chat').append(result);
+var ul = document.getElementById("chat")
+
+         ul.scrollTo(0, ul.scrollHeight);
+
+};
+const chat:chat = new chat(token)
+
+chat.fetchUsermessage()
+chat.fetchUserGroupes()
+chat.fetchUserGroupsMessages()
+
+const users= JSON.parse( localStorage.getItem('displayusers')) ;
+const messages= JSON.parse( localStorage.getItem('messages')) ;
+const groups =JSON.parse( localStorage.getItem('usergroups')) ; 
+const groupmessages =JSON.parse( localStorage.getItem('groupmessages'))
+var ul = document.getElementById("myul")
+var ul2 = document.getElementById("myulgrp")
+var j = 0 ;
+for( var i of users ){
+  var li = document.createElement("li");
+  li.className="c-users__person"
+  li.id=""+j;
+  var text= document.createTextNode(i.firstName); 
+  ul.appendChild(li).appendChild(text)
+j++;
+}
+j=0
+for( var i of groups ){
+  var li = document.createElement("li");
+  li.className="c-users__person"
+  li.id=""+j;
+  var text= document.createTextNode(i.groupname); 
+  ul2.appendChild(li).appendChild(text)
+j++;
+}
+
+
+ul.addEventListener('click', function(e) {
+
+localStorage.removeItem('selecteduser')
+
+var input = document.getElementById("send")
+$('#chat').empty()
+e.preventDefault()
+selectedUser= users[e.target.id] ;
+localStorage.setItem('selecteduser', JSON.stringify(selectedUser)) ;
+    if (e.target.tagName === 'LI'){
+  var result = "";
+  $(messages).each(function (key, message) {
+if(message.sender.id===token.user_id){
+
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ token.firstName+" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
+}else{
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ users[e.target.id].firstName+" </span><time>12:49pm</time><p>"+message.content+"</p></div></div>";
+
+}
+
+});
+
+result +="</div>"
+result +="</div>"
+
+$('#chat').append(result);
+var ul = document.getElementById("chat")
+ ul.scrollTo(0, ul.scrollHeight);
+input.style.display="inline"
+
+    }
+});
+
+let selectedGroup=null ;
+ul2.addEventListener('click', function(e) {
+selectedUser=null ; 
+var input = document.getElementById("send")
+$('#chat').empty()
+e.preventDefault() 
+    if (e.target.tagName === 'LI'){
+  var result = "";
+  selectedGroup=groups[e.target.id]
+console.log(selectedGroup)
+  $(groupmessages ).each(function (key, messageTable) {
+    messageTable.map(message =>{
+if(message.group.id===selectedGroup.id){
+ console.log(message[0])
+  if(message.content!=="undefined")
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ token.firstName+" </span><time>"+message.date+"</time><p>"+message.content+"</p></div></div>";
+}else{
+     result += " <div class='c-chat__msg'><span class='c-chat__icon'></span><div class='c-chat__text'><span> "+ "users[e.target.id].firstName"+" </span><time>12:49pm</time><p>"+message.content+"</p></div></div>";
+
+}
+
+})
+  
+  
+
+
+
+});
+
+result +="</div>"
+result +="</div>"
+
+  $('#chat').append(result);
+var ul = document.getElementById("chat")
+         ul.scrollTo(0, ul.scrollHeight);
+input.style.display="inline"
+
+
+    }
+});
+
+
+
+
+function send() {
+
+var content = document.getElementById("send").value
+var input = document.getElementById("send")
+input.value=''
+
+if(selectedUser===null){
+newSocket.send(JSON.stringify(
+        {
+          content: content,
+          sender: token.user_id,
+          group:selectedGroup,
+          receiver: selectedUser ,
+          receivers:selectedGroup.users
+        }
+      ));
+
+}else{
+
+
+newSocket.send(JSON.stringify(
+        {
+          content: content,
+          sender: token.user_id,
+          receiver: selectedUser,
+       
+        }
+      ));
+}
+}   
+
+const handlefile = async (e) => {
+    console.log("lol")
+    const file = document.getElementById("file").files[0]
+    const base64 = await convertBase64(file);
+   // let pdf=base64 ; 
+
+
+const name = "yea"
+const id ="gkkjkbnjkluiubjkbiiujkjklbfh"
+const fiile="rgrf" 
+const idd = selectedGroup.groupname
+let data ={
+id:id , 
+name :  name,
+file:base64 , 
+type:name,
+groupname : idd,
+}
+console.log(data);
+
+    await axios({
+      method: 'post',
+      url: `http://localhost:3000/api/files/`,
+      headers: {
+       'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('__TOKEN__')
+      },
+       data:data,
+    }).then(  (response) => {
+       console.log(response.data);
+       
+       //localStorage.setItem('activities', JSON.stringify(response.data))                 
+     }).catch((error) => {
+      console.error('There was an error!', error)
+    });
+
+data ={
+groupname : idd,
+}
+await axios({
+      method: 'post',
+      url: `http://localhost:3000/api/files/myfiles`,
+      headers: {
+       'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('__TOKEN__')
+      },
+       data:data,
+    }).then(  (response) => {
+        console.log(response.data[0].file)
+         downloadPDF(response.data[0].file)
+       //localStorage.setItem('activities', JSON.stringify(response.data))                 
+     }).catch((error) => {
+      console.error('There was an error!', error)
+    });
+
+
+
+    
+  }
+
+
+ const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+
+
+  };
+
+function downloadPDF(pdf) {
+const linkSource = `${pdf}`;
+const downloadLink = document.createElement("a");
+const fileName = "abc.pdf";
+downloadLink.href = linkSource;
+downloadLink.download = fileName;
+downloadLink.click();}
+
+
+
+
+
+
+
+</script>
