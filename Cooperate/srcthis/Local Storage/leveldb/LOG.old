@@ -1,17 +1,3 @@
-2022/05/16-21:47:22.658 4100 Reusing MANIFEST C:\Users\reda falhi\OneDrive\Documents\GitHub\Cooperate\Cooperate\srcthis\Local Storage\leveldb/MANIFEST-000001
-2022/05/16-21:47:22.659 4100 Recovering log #146
-2022/05/16-21:47:22.659 4100 Level-0 table #148: started
-2022/05/16-21:47:22.661 4100 Level-0 table #148: 22545 bytes OK
-2022/05/16-21:47:22.663 4100 Delete type=0 #146
-2022/05/16-21:49:23.897 1090 Level-0 table #151: started
-2022/05/16-21:49:23.906 1090 Level-0 table #151: 22685 bytes OK
-2022/05/16-21:49:23.906 1090 Delete type=0 #149
-2022/05/16-21:49:23.906 1090 Compacting 4@0 + 1@1 files
-2022/05/16-21:49:23.908 1090 Generated table #152@0: 13 keys, 14131 bytes
-2022/05/16-21:49:23.908 1090 Compacted 4@0 + 1@1 files => 14131 bytes
-2022/05/16-21:49:23.909 1090 compacted to: files[ 0 1 0 0 0 0 0 ]
-2022/05/16-21:49:23.910 1090 Delete type=2 #140
-2022/05/16-21:49:23.910 1090 Delete type=2 #143
-2022/05/16-21:49:23.910 1090 Delete type=2 #145
-2022/05/16-21:49:23.910 1090 Delete type=2 #148
-2022/05/16-21:49:23.910 1090 Delete type=2 #151
+2022/05/17-02:50:08.373 50bc Reusing MANIFEST C:\Users\reda falhi\OneDrive\Documents\GitHub\Cooperate\Cooperate\srcthis\Local Storage\leveldb/MANIFEST-000001
+2022/05/17-02:50:08.373 50bc Recovering log #190
+2022/05/17-02:50:08.373 50bc Reusing old log C:\Users\reda falhi\OneDrive\Documents\GitHub\Cooperate\Cooperate\srcthis\Local Storage\leveldb/000190.log 

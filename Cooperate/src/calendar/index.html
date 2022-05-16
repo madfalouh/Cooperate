@@ -1,0 +1,358 @@
+ <div id="root"></div>
+<script>
+class Calendar {
+  constructor(root) {
+    this.datetime = new Date('3/16/2022')
+    this.config = {
+      color: "#fff",
+      backgroundColor: "#000",
+      highlightColor: '#2a2a2a',
+      classBtn: 'c-btn'
+    }
+    this.configGrid = {
+      color: "#fff",
+      backgroundColor: "#000",
+      width: window.innerWidth / 7,
+      height: window.innerWidth / 7,
+      fontSize: window.innerWidth < 757 ? 40 : 30,
+      fontType: 'sans-serif',
+      fontWeight: 'bold',
+      dayNameHeight: 20,
+      padding: 20,
+      margin: 20
+    }
+    this.configDayHeader = {
+      height: this.configGrid.dayNameHeight,
+      width: this.configGrid.width,
+      color: "#fff",
+      fontType: 'sans-serif',
+      fontWeight: 'bold',
+      padding: 20
+    }
+    this.configMonthHeader = {
+      height: this.configGrid.height * 2,
+      width: window.innerWidth,
+      color: "#fff",
+      fontSize: window.innerWidth < 757 ? 20 : 40,
+      fontType: 'sans-serif',
+      fontWeight: 400,
+      padding: 20,
+      buttonPadding: 10,
+    }
+    this.root = document.getElementById(root)
+    window.addEventListener('resize', () => this.reset())
+  }
+
+  reset() {
+    this.configGrid.width = window.innerWidth / 7
+    this.configGrid.height = window.innerWidth / 7
+    this.configGrid.fontSize = window.innerWidth < 757 ? 20 : 30
+    this.configDayHeader.height = this.configGrid.dayNameHeight
+    this.configDayHeader.width = this.configGrid.width
+    this.configMonthHeader.height = this.configGrid.height * 2
+    this.configMonthHeader.width = window.innerWidth
+    this.configMonthHeader.fontSize = window.innerWidth < 757 ? 20 : 40
+    this.render()
+  }
+  /** 
+     * gets the month
+     *
+    */
+  getMonth(month) {
+    return this.datetime.getMonth() + 1
+  }
+
+  /** 
+     * sets the month
+     *
+    */
+  setMonth(month) {
+    this.datetime.setMonth(month - 1)
+  }
+
+  /** 
+     * gets the year
+     *
+    */
+  getYear() {
+    return this.datetime.getFullYear()
+  }
+
+  /** 
+     * sets the year
+     *
+    */
+  setYear(year) {
+    this.datetime.setFullYear(year)
+  }
+
+  /** 
+     * @returns the number of days in a month
+     *
+    */
+  getDaysInMonth() {
+    const month = this.getMonth()
+    return new Date('2022', month, 0).getDate()
+  }
+
+  /** 
+     * @returns the start day of the month
+     *
+    */
+  getStartDayOfMonth() {
+    return new Date(`${this.getMonth()}/01/${this.getYear()}`).getDay()
+  }
+
+  /** 
+     * @returns SVG week header with grid and day names
+     *
+    */
+  componentDayHeader() {
+    const { 
+      color,
+      width,
+      height, 
+      fontType, 
+      fontWeight
+    } = this.configDayHeader
+
+    const { fontSize } = this.configGrid
+
+    let weekDayGrid, weekDayText
+    for (let x = 0; x < 7; x++) {
+      weekDayGrid += `<rect
+          stroke='${color}'
+          width='${this.configGrid.width}'
+          height='${fontSize + height}'
+          x=${width * x}
+          y=0
+        />`
+
+      weekDayText += `<text 
+          x=${width * x + width / 2} 
+          y=${fontSize}
+          style='
+            fill:${color};
+            font:${fontWeight} ${fontSize}px ${fontType};
+            text-anchor:middle;
+            dominant-baseline:middle;
+          '
+        >
+          ${new Date(`01/${x + 1}`).toString().substr(0, 3)}
+        </text>`
+    }
+
+    return {
+      weekDayGrid,
+      weekDayText
+    }
+  }
+
+  /** 
+     * @returns SVG calendar day grid
+     *
+    */
+  componentDayGrid() {
+    const { color, highlightColor } = this.config
+    const { 
+      width,
+      height, 
+      fontSize, 
+      fontType, 
+      fontWeight,
+      dayNameHeight,
+      padding,
+      margin
+    } = this.configGrid
+
+    const start = this.getStartDayOfMonth()
+
+    const today = this.datetime.getDate()
+    const month = this.datetime.getMonth()
+
+    let monthDayGrid, monthDayText, todayMark, isToday = false, isMonth = false
+    for (let x = 0; x < this.getDaysInMonth() + start; x++) {
+      const day = x + 1 - start
+      isToday = day === new Date().getDate() ? true : false
+      isMonth = month === new Date().getMonth() ? true : false
+      if (isToday && isMonth) {
+        todayMark = `<circle 
+            cx="${width * (x % 7) + fontSize * 2}"
+            cy="${Math.floor(x / 7) * width + fontSize * 2 + dayNameHeight - (width / 20)}"
+            r="${width / 20}"
+            fill="${color}"
+          />`
+      }
+      monthDayGrid += `<rect 
+          stroke='${color}'
+          fill='${isToday && isMonth ? highlightColor : 'none'}'
+          width='${width}'
+          height='${height}'
+          x=${width * (x % 7)}
+          y=${Math.floor(x / 7) * width + fontSize + dayNameHeight}
+        />`
+
+      monthDayText += x >= start ? `<text 
+          x=${width * (x % 7) + 10} 
+          y=${Math.floor(x / 7) * width + fontSize * 2 + dayNameHeight} 
+          style='
+            fill:${color};
+            font:${fontWeight} ${fontSize}px ${fontType};
+          '
+        >
+            ${day}
+        </text>` : ``
+    }
+
+    return {
+      monthDayGrid,
+      monthDayText,
+      todayMark
+    }
+  }
+
+  /** 
+     * @returns month header components
+     *
+    */
+  componentMonthHeader() {
+    const xmlns = "http://www.w3.org/2000/svg"
+    const { fontSize, fontType, fontWeight } = this.configMonthHeader
+    const buttonStyle = `
+        position:absolute;
+        right:0;
+        top:50%;
+        transform:translateY(-50%);
+        width:${fontSize/1.2}px;
+        padding:${fontSize/4/2};
+      `
+    const prevButton = document.createElementNS(xmlns, 'svg')
+    prevButton.setAttributeNS(null, 'viewBox', '0 0 40 40')
+    prevButton.setAttributeNS(null, 'style', `${buttonStyle}right:${fontSize};`)
+    prevButton.classList.add(this.config.btnClass)
+    prevButton.innerHTML = `<rect 
+        stroke='#fff'
+        width='36'
+        height='36'
+        x='2'
+        y='0'
+        stroke-width="2"
+        fill="none"
+      />
+      <polyline 
+        stroke="#fff"
+        stroke-width="2"
+        points="30,32 10,19 30,5"
+        fill="none"
+      />`
+    prevButton.addEventListener('click', event => this.handleMonthChange(event, -1))
+
+    const nextButton = document.createElementNS(xmlns, 'svg')
+    nextButton.setAttributeNS(null, 'viewBox', `0 0 40 40`)
+    nextButton.setAttributeNS(null, 'style', `${buttonStyle}right:0;`
+                             )
+    nextButton.classList.add(this.config.btnClass)
+    nextButton.innerHTML = `<rect 
+        stroke='#fff'
+        width='36'
+        height='36'
+        x='2'
+        y='0'
+        stroke-width="2"
+        fill="none"
+      />
+      <polyline 
+        stroke='#fff'
+        stroke-width="2"
+        points="10,5 30,19 10,32"
+        fill="none"
+      />`
+
+    nextButton.addEventListener('click', event => this.handleMonthChange(event, 1))
+
+    const monthHeading = document.createElement('div')
+    monthHeading.setAttribute('style', `position:relative;text-align:center;margin-bottom:${this.configGrid.padding}px;color:#fff;font:${fontWeight} ${fontSize}px ${fontType}`)
+    const month = this.datetime.toLocaleString('default', { month: 'long' })
+
+    monthHeading.textContent = `${month} ${this.getYear()}`
+    monthHeading.append(prevButton)
+    monthHeading.append(nextButton)
+
+    return monthHeading
+  }
+
+  /** 
+     * @returns today mark component
+     *
+    */
+  componentToday() {
+
+    return
+  }
+
+  /** 
+     * @returns CSS component
+     *
+    */
+  componentStyle() {
+    const style = document.createElement('style')
+    style.innerHTML = `
+        .${this.config.btnClass} {
+          background-color: ${this.config.backgroundColor};
+        }
+        .${this.config.btnClass}:hover {
+          background-color: ${this.config.highlightColor};
+          cursor: pointer;
+        }
+      `
+    return style
+  }
+
+  /** 
+     * month button event handler
+     *
+    */
+  handleMonthChange = (event, increment) => {
+    event.stopPropagation()
+    const month = this.getMonth(), year = this.getYear()
+    let newMonth = month + increment, newYear = year
+    if (newMonth < 1) {
+      newMonth = 12
+      newYear--
+      this.setYear(newYear)
+    }
+    if (newMonth > 12) { 
+      newMonth = 1
+      newYear++
+      this.setYear(newYear)
+    }
+    this.setMonth(newMonth)
+    this.render()
+  }
+
+  render() {
+    // Load components and configuration
+    const { monthDayGrid, monthDayText, todayMark } = this.componentDayGrid()
+    const { weekDayGrid, weekDayText } = this.componentDayHeader()
+    const { backgroundColor } = this.config
+    const { width, dayNameHeight, fontSize, padding, margin } = this.configGrid
+
+    // Apply root element configuration
+    this.root.setAttribute('style', `background-color:${backgroundColor};padding:${padding}px;margin:${margin}px;`)
+
+    // Update root element with components
+    this.root.innerHTML = `
+        <svg viewBox='0 0 ${window.innerWidth} ${width * 5 + dayNameHeight + fontSize}'>
+          ${weekDayGrid}${weekDayText}
+          ${monthDayGrid}${todayMark}${monthDayText}
+        </svg>
+      `
+    this.root.prepend(this.componentMonthHeader())
+    this.root.append(this.componentStyle())
+  }
+}
+
+const calendar = new Calendar('root');
+
+calendar.render()
+</script>

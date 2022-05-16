@@ -1,3 +1,5 @@
-2022/05/16-21:59:43.131 1bbc Reusing MANIFEST C:\Users\reda falhi\OneDrive\Documents\GitHub\Cooperate\Cooperate\srcthis\Local Storage\leveldb/MANIFEST-000001
-2022/05/16-21:59:43.133 1bbc Recovering log #150
-2022/05/16-21:59:43.133 1bbc Reusing old log C:\Users\reda falhi\OneDrive\Documents\GitHub\Cooperate\Cooperate\srcthis\Local Storage\leveldb/000150.log 
+2022/05/17-02:52:31.190 31c8 Reusing MANIFEST C:\Users\reda falhi\OneDrive\Documents\GitHub\Cooperate\Cooperate\srcthis\Local Storage\leveldb/MANIFEST-000001
+2022/05/17-02:52:31.190 31c8 Recovering log #190
+2022/05/17-02:52:31.190 31c8 Level-0 table #193: started
+2022/05/17-02:52:31.197 31c8 Level-0 table #193: 23460 bytes OK
+2022/05/17-02:52:31.199 31c8 Delete type=0 #190
