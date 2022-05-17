@@ -28,7 +28,8 @@
 
 
 <script type="text/babel">
-
+var myImage = new Image(100, 200);
+myImage.src = '../images/user.png';
   let alldata = [];
   const token = JSON.parse(localStorage.getItem('decoded_token'));
 
@@ -44,7 +45,7 @@
   };
   var result = '<div class="profile-wrapper">';
   $(data.alldata).each(function (key, val) {
-    result += '<div class="profile" tabindex="0"><figure><img src=' + 'https://dl.dropboxusercontent.com/s/q9q20r92696kt3g/ethen-hunt.jpg' + ' /></figure><span class="info"><h4>' + val.id + '</h4><span>' + 'hobaa' + '</span></span></div>';
+    result += '<div class="profile" tabindex="0"><figure><img src=' + '../images/user.png' + ' /></figure><span class="info"><h4>' + val.description + '</h4><span>' + val.SenderName + '</span></span></div>';
   });
   result += '</div>';
   $('#profiles').append(result);

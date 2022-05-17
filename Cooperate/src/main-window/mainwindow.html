@@ -226,9 +226,8 @@ webview3.style.display="none" ;
 
 webview2.style.display="none" ;
 
-webview3.addEventListener("dom-ready", function(){
-  webview3.openDevTools();
-});
+webview1.addEventListener("dom-ready", function(){
+ });
 
 
 function activity(){
@@ -359,8 +358,8 @@ audio.currentTime = 0;
 };
 
 function answer(){
-call.style.display="none" ;
-shell.openExternal('file:///C:/Users/reda%20falhi/OneDrive/Bureau/group-video-chat-master/index.html')
+  call.style.display="none" ;
+shell.openExternal('file:///C:/Users/hp/Cooperate/group-video-chat/index.html')
 audio.pause();
 audio.currentTime = 0;
 
@@ -375,14 +374,20 @@ audio.currentTime = 0;
 
 }
 
+function uuidv4() {
+  return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+  );
+}
+
 
 function lol(){
-shell.openExternal('file:///C:/Users/reda%20falhi/OneDrive/Bureau/group-video-chat-master/index.html')
+shell.openExternal('file:///C:/Users/hp/Cooperate/group-video-chat/index.html')
 
 const token = JSON.parse(localStorage.getItem('decoded_token'));
 
 const selectedUser =  JSON.parse(localStorage.getItem('selecteduser')).id
-  const id= "effgfhgfgghef"  ;
+  const id= uuidv4() ;
 
 newSocket.send(JSON.stringify(
         {
@@ -392,6 +397,29 @@ newSocket.send(JSON.stringify(
          SenderName:   token.user_id,
         }
       ));
+
+
+	  const path = require('path');
+  const remote = require('electron').remote;
+  const BrowserWindow = remote.BrowserWindow;
+  const win = new BrowserWindow({
+ resizable :true , 
+  transparent: true, 
+     frame: false, 
+    
+    height: 480,
+    width: 768 , 
+ webPreferences: {
+      nodeIntegration: true , 
+      webSecurity: false ,
+webviewTag:true,
+    } ,
+ 
+  });
+
+win.loadFile(path.join(__dirname, '../record/index.html'));
+
+
 }
 
 </script>

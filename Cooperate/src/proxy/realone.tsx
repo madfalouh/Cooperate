@@ -23,7 +23,7 @@ webviewTag:true,
   });
 
 win.loadFile(path.join(__dirname, '../main-window/mainwindow.html'));
-win.webContents.openDevTools();
+//win.webContents.openDevTools();
 
       
       

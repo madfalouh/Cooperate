@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-app.setPath ('userData', __dirname +"this");
+//app.setPath ('userData', __dirname +"this");
 //app.setPath ('userData', __dirname +"this1");
 //app.setPath ('userData', __dirname +"this2");
 //app.setPath ('userData', __dirname +"this3");
@@ -14,12 +14,12 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
- //resizable :false , 
- // transparent: true, 
-     //frame: false, 
-   //  alwaysOnTop: true ,
-    width: 1500,
-    height: 1350,
+ resizable :false , 
+  transparent: true, 
+     frame: false, 
+     alwaysOnTop: true ,
+    width: 500,
+    height: 350,
 
  webPreferences: {
       webSecurity: false ,
@@ -34,7 +34,7 @@ webviewTag:true,
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
-mainWindow.webContents.openDevTools();
+//mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished

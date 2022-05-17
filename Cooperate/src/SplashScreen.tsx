@@ -25,6 +25,6 @@ webviewTag:true,
   });
 
 win.loadFile(path.join(__dirname, 'login-register/login.html'));
-win.webContents.openDevTools();
+//win.webContents.openDevTools();
 }
 }

@@ -12,7 +12,6 @@
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
-
   "author": "jeffd23",
   "license": "MIT",
   "config": {
